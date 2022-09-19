@@ -12,10 +12,10 @@
 </template>
 
 <script>
-import bpmnModeler from '../package/index'
+import bpmnModeler from './package/index'
 export default {
   components: {
-    bpmnModeler
+    bpmnModeler,
   },
   data() {
     return {
@@ -23,11 +23,11 @@ export default {
       users: [],
       groups: [],
       categorys: [],
-      isView: false
+      isView: false,
     }
   },
   mounted() {
-    window.addEventListener('message', event => {
+    window.addEventListener('message', (event) => {
       this.set(event.data)
     })
   },
@@ -38,8 +38,8 @@ export default {
       this.groups = eventData.groups ?? []
       this.categorys = eventData.categorys ?? []
       this.isView = eventData.isView ?? false
-    }
-  }
+    },
+  },
 }
 </script>
 
