@@ -30,22 +30,22 @@ if (NODE_ENV === 'lib') {
   appFileName = 'Lib'
 }
 
-const mainFileStr = `
-import Vue from 'vue'
-import App from './${appFileName}.vue'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+// const mainFileStr = `
+// import Vue from 'vue'
+// import App from './${appFileName}.vue'
+// import ElementUI from 'element-ui'
+// import 'element-ui/lib/theme-chalk/index.css'
 
-Vue.config.productionTip = false
+// Vue.config.productionTip = false
 
-Vue.use(ElementUI)
+// Vue.use(ElementUI)
 
-new Vue({
-  render: h => h(App)
-}).$mount('#app')
-`
+// new Vue({
+//   render: h => h(App)
+// }).$mount('#app')
+// `
 
-fs.writeFileSync('./src/main.js', mainFileStr)
+// fs.writeFileSync('./src/main.js', mainFileStr)
 
 const resolve = dir => {
   return path.join(__dirname, dir)
@@ -102,6 +102,6 @@ module.exports = {
   productionSourceMap: false,
   // 这里写你调用接口的基础路径，来解决跨域，如果设置了代理，那你本地开发环境的axios的baseUrl要写为 '' ，即空字符串
   devServer: {
-    proxy: 'http://localhost:9527'
+    proxy: 'http://192.168.5.159:12345'
   }
 }

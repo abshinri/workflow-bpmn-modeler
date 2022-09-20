@@ -303,7 +303,7 @@ export default {
       const xml = await this.saveXML()
       const svg = await this.saveImg()
       const result = { process, xml, svg }
-      this.$emit('save', result)
+      this.$bus.$emit('save', result)
       window.parent.postMessage(result, '*')
     },
     openBpmn(file) {

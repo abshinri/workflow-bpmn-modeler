@@ -35,6 +35,7 @@
     "url": "https://github.com/GoldSubmarine/workflow-bpmn-modeler/issues"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "bpmn-js": "^7.2.1",
     "element-ui": "^2.12.0",
     "vue": "^2.6.10",
