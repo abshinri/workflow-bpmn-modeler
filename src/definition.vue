@@ -27,7 +27,7 @@
               type="text"
               size="small"
               @click="handleClick(scope.row)"
-            >查看</el-button>
+            >流程图</el-button>
             <el-button
               type="text"
               size="small"
@@ -83,26 +83,34 @@ export default {
       tableData: []
     }
   },
-  mounted() {
-    this.$bus.$on('save', (result) => {
-      axios
-        .request({
-          url: '/flowable/definition/save',
-          method: 'post',
-          data: {
-            category: 'demo',
-            name: result.process.name,
-            xml: result.xml
-          }
-        })
-        .then((res) => {
-          this.$message.success('保存成功')
-        })
-    })
-
-    this.getFlowList()
+  unmount() {
+    this.$bus.$off('save')
   },
   methods: {
+    init() {
+      this.$bus.$on('save', (result) => {
+        axios
+          .request({
+            url: '/flowable/definition/save',
+            method: 'post',
+            data: {
+              category: 'demo',
+              name: result.process.name,
+              xml: result.xml
+            }
+          })
+          .then((res) => {
+            this.$message.success('保存成功')
+
+            this.getFlowList()
+          })
+          .catch((err) => {
+            this.$message.error(err)
+          })
+      })
+
+      this.getFlowList()
+    },
     // 获取工作流的定义
     getFlowList() {
       axios
@@ -112,6 +120,9 @@ export default {
         })
         .then((res) => {
           this.tableData = res.data
+        })
+        .catch((err) => {
+          this.$message.error(err)
         })
     },
     getFlowXml(deployId) {
@@ -123,6 +134,9 @@ export default {
         .then((res) => {
           this.xml = res.data
           this.openBpmn = true
+        })
+        .catch((err) => {
+          this.$message.error(err)
         })
     },
     openEvent(id) {
@@ -149,6 +163,9 @@ export default {
         })
         .then((res) => {
           this.$message.success('启动成功')
+        })
+        .catch((err) => {
+          this.$message.error(err)
         })
     },
     handleClick(row) {
